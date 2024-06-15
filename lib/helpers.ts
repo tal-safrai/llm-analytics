@@ -18,7 +18,7 @@ export async function getRPMData(): Promise<RPMRecord[]> {
   try {
     const clickHouseClient = creteClickHouseClient();
     const resultSet = await clickHouseClient.query({
-      query: "SELECT request_model, CONCAT(SUBSTRING(start_time, 1, 10), ' ', SUBSTRING(start_time, 12, 5)) AS minute, COUNT(*) AS RPM FROM llm_analytics.requests GROUP BY request_model, minute LIMIT 10",
+      query: "SELECT request_model, CONCAT(SUBSTRING(start_time, 1, 10), ' ', SUBSTRING(start_time, 12, 5)) AS minute, COUNT(*) AS RPM FROM llm_analytics.requests GROUP BY request_model, minute",
       format: "JSONEachRow",
     });
 
@@ -36,7 +36,7 @@ export async function getTPMData(): Promise<TPMRecord[]> {
   try {
     const clickHouseClient = creteClickHouseClient();
     const resultSet = await clickHouseClient.query({
-      query: "SELECT request_model, CONCAT(SUBSTRING(start_time, 1, 10), ' ', SUBSTRING(start_time, 12, 5)) AS minute, SUM(total_token_count) AS TPM FROM llm_analytics.requests GROUP BY request_model, minute LIMIT 10",
+      query: "SELECT request_model, CONCAT(SUBSTRING(start_time, 1, 10), ' ', SUBSTRING(start_time, 12, 5)) AS minute, SUM(total_token_count) AS TPM FROM llm_analytics.requests GROUP BY request_model, minute",
       format: "JSONEachRow",
     });
 
